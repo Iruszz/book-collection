@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue';
 import { fetchAuthors, getAllAuthors } from '../store';
 
 fetchAuthors();

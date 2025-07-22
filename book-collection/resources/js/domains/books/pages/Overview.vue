@@ -1,8 +1,8 @@
 <script setup>
-import { onMounted } from 'vue';
-import { fetchBooks } from '../store';
+import { fetchBooks, getAllBooks } from '../store';
 
 fetchBooks();
+
 </script>
 
 <template>

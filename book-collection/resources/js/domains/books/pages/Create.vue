@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Nieuw boek toevoegen</h2>
+        <h2>Add new Book</h2>
         <Form :book="book" @submit="handleSubmit" />
     </div>
 </template>

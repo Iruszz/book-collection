@@ -1,12 +1,11 @@
 <template>
     <div>
-        <h2>Boek bewerken</h2>
+        <h2>Edit Book</h2>
         <Form v-if="book" :book="book" @submit="handleSubmit" />
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
 import { fetchBooks, getBookById, updateBook } from '../store';

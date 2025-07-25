@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ref, computed } from 'vue';
+import { getRequest } from '../../services/http/index';
 
 // state
 const books = ref([]);
@@ -9,8 +10,8 @@ export const getAllBooks = computed(() => books.value);
 
 // actions
 export const fetchBooks = async () => {
-    const {data} = await axios.get('/api/books');
-    if(!data) return
+    const {data} = await getRequest('/books');
+    if(!data) return;
     books.value = data;
 };
 

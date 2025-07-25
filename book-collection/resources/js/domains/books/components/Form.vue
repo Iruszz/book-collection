@@ -1,19 +1,19 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        <label>Titel:</label>
+        <label>Title:</label>
         <input v-model="form.title" type="text" required />
 
-        <label>Samenvatting:</label>
+        <label>Summary:</label>
         <textarea v-model="form.summary" required></textarea>
 
-        <label>Auteur:</label>
+        <label>Author:</label>
         <select v-model="form.author_id" required>
             <option v-for="author in getAllAuthors" :key="author.id" :value="author.id">
                 {{ author.name }}
             </option>
         </select>
 
-        <button type="submit">Opslaan</button>
+        <button type="submit">Save</button>
     </form>
 </template>
 

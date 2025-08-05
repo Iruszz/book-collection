@@ -1,7 +1,13 @@
 <script setup>
 // import { fetchAuthors, getAllAuthors, deleteAuthor } from '../store';
-import {  } from './../index';
+import { authorStore } from './../index';
 // fetchAuthors();
+
+// const authorStore = baseProjectStore('authors');
+
+authorStore.actions.getAll();
+
+const authors = authorStore.getters.all;
 </script>
 
 <template>

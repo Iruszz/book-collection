@@ -1,6 +1,7 @@
 <script setup>
-import { fetchAuthors, getAllAuthors, deleteAuthor } from '../store';
-fetchAuthors();
+// import { fetchAuthors, getAllAuthors, deleteAuthor } from '../store';
+import {  } from './../index';
+// fetchAuthors();
 </script>
 
 <template>

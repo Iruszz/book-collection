@@ -1,19 +1,26 @@
 import { ref, computed } from 'vue';
+import { getRequest, postRequest, putRequest, deleteRequest } from '../../services/http';
 
 export const storeModuleFactory = (moduleName) => {
     const state = ref({});
 
     const getters = {
         all: computed(() => state.value),
-        getById: (id) => computed(() => state.value[id])
+        getById: (id) => state.value[id]
     };
 
     const setters = {
         setAll: (items) => {
-            for (const item of items) state.value[item.id] = Object.freeze(item);
+            const newState = {};
+            for (const item of items) {
+                newState[item.id] = Object.freeze(item);
+            }
+            state.value = newState;
         },
         deleteByItem: (item) => {
-            delete state.value[item.id];
+            const newState = { ...state.value };
+            delete newState[item.id];
+            state.value = newState;
         }
     };
 

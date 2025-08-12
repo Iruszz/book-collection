@@ -6,7 +6,7 @@ export const storeModuleFactory = (moduleName) => {
 
     const getters = {
         all: computed(() => state.value),
-        getById: (id) => state.value[id]
+        getById: (id: number) => computed(() => state.value[id]),
     };
 
     const setters = {

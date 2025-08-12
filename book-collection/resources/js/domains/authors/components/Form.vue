@@ -14,6 +14,7 @@ import { fetchAuthors, getAllAuthors } from '../../authors/store';
 // Fetch authors when component is mounted
 fetchAuthors();
 
+
 const props = defineProps({ author: Object });
 
 const emit = defineEmits(['submit']);

@@ -10,14 +10,12 @@ const bookStore = storeModuleFactory('books');
 bookStore.actions.getAll();
 const books = bookStore.getters.all;
 
-// 
-const bookId = Number(route.params.id);
-console.log('bookId, ', bookId);
-const id = bookStore.getters.getById(bookId);
-
 bookStore.setters.deleteByItem;
-const deleteBook = bookStore.actions.delete(id);
-console.log('deleteBook, ', deleteBook);
+
+const deleteBook = (id) => {
+    bookStore.actions.delete(id);
+}
+
 </script>
 
 <template>
@@ -29,9 +27,9 @@ console.log('deleteBook, ', deleteBook);
         <tr v-for="book in books" :key="book">
             <td>{{ book.title }}</td>
             <td>{{ book.summary }}</td>
-            <td><RouterLink :to="{ name: 'books.edit', params: { id: bookId } }">Edit Book</RouterLink></td>
+            <td><RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Edit Book</RouterLink></td>
             <!--  -->
-            <td><button @click="deleteBook">Delete</button></td>
+            <td><button @click="deleteBook(book.id)">Delete</button></td>
         </tr>
     </table>
 </template>

@@ -7,7 +7,7 @@
 
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
 
@@ -18,20 +18,16 @@ const authorStore = storeModuleFactory('authors');
 
 const authorId = Number(route.params.id);
 
+authorStore.actions.getAll();
+
 const author = authorStore.getters.getById(authorId);
 
-onMounted(async () => {
-  await authorStore.actions.getAll();
-});
-
-const updateAuthor = async (id, data) => {
-    await authorStore.actions.update(id, data);
-};
+// const updateAuthor = async (id, data) => {
+//     await authorStore.actions.update(id, data);
+// };
 
 const handleSubmit = async (data) => {
-    await updateAuthor(route.params.id, data);
-    router.push({ name: 'author.overview' }).catch((err) => {
-        throw new Error(`Problem handling something: ${err}.`);
-    });
+    await authorStore.actions.update(route.params.id, data);
+    router.push({ name: 'author.overview' });
 };
 </script>

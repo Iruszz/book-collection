@@ -7,7 +7,6 @@
 
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
-import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
 
@@ -18,18 +17,12 @@ const bookStore = storeModuleFactory('books');
 
 const bookId = Number(route.params.id);
 
+bookStore.actions.getAll();
+
 const book = bookStore.getters.getById(bookId);
 
-onMounted(async () => {
-  await bookStore.actions.getAll();
-});
-
-const updateBook = async (id, data) => {
-    await bookStore.actions.update(id, data);
-};
-
 const handleSubmit = async (data) => {
-    await updateBook(route.params.id, data);
+    await bookStore.actions.update(route.params.id, data);
     router.push({ name: 'books.overview' });
 };
 

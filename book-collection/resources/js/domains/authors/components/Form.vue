@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        <label>Auteur:</label>
+        <label>Author:</label>
         <input v-model="form.name" type="text" required />
         
         <button type="submit">Save</button>

@@ -25,8 +25,10 @@ const deleteBook = (id) => {
             <th>Summary</th>
         </tr>
         <tr v-for="book in books" :key="book">
-            <td>{{ book.title }}</td>
-            <td>{{ book.summary }}</td>
+            <RouterLink :to="{ name: 'books.show', params: { id: book.id } }">
+                <td>{{ book.title }}</td>
+                <td>{{ book.summary }}</td>
+            </RouterLink>
             <td><RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Edit Book</RouterLink></td>
             <!--  -->
             <td><button @click="deleteBook(book.id)">Delete</button></td>

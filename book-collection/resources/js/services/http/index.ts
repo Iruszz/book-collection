@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { destroyErrors } from 'services/error';
-import { setErrorBag, setMessage } from 'services/error';
+import { destroyErrors, destroyMessage } from '../error';
+import { setErrorBag, setMessage } from '../error';
 
 const http = axios.create({
     baseURL: '/api',
@@ -24,6 +24,7 @@ http.interceptors.response.use(
         if (error.response && error.response.status === 422) {
             setErrorBag(error.response.data.errors); // Sla validatiefouten op in de error bag
             setMessage(error.response.data.message); // Sla de algemene foutmelding op
+            console.log(error.response.data.message);
         }
         return Promise.reject(error);
     }

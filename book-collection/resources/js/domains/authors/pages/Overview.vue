@@ -1,6 +1,7 @@
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
+import ErrorMessage from '../../../services/components/ErrorMessage.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -18,6 +19,8 @@ const deleteAuthor = (id) => {
 </script>
 
 <template>
+
+    <ErrorMessage />
     <table>
         <tr>
             <th>Name</th>

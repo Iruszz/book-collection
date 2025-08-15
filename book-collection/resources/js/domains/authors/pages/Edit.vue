@@ -22,10 +22,6 @@ authorStore.actions.getAll();
 
 const author = authorStore.getters.getById(authorId);
 
-// const updateAuthor = async (id, data) => {
-//     await authorStore.actions.update(id, data);
-// };
-
 const handleSubmit = async (data) => {
     await authorStore.actions.update(route.params.id, data);
     router.push({ name: 'author.overview' });

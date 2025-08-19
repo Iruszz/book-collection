@@ -1,11 +1,11 @@
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
+import { bookStore } from '..';
+
 
 const route = useRoute();
 const router = useRouter();
-
-const bookStore = storeModuleFactory('books');
 
 bookStore.actions.getAll();
 const books = bookStore.getters.all;

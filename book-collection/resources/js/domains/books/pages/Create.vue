@@ -10,10 +10,9 @@ import Form from '../components/Form.vue';
 import { storeModuleFactory } from '../../../services/store';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { bookStore } from '..';
 
 const router = useRouter();
-
-const bookStore = storeModuleFactory('books');
 
 const book = ref({
     title: '',

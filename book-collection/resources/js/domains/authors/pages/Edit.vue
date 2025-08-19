@@ -7,14 +7,13 @@
 
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
-// import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
+import { authorStore } from '..';
+
 
 const route = useRoute();
 const router = useRouter();
-
-const authorStore = storeModuleFactory('authors');
 
 const authorId = Number(route.params.id);
 

@@ -12,7 +12,8 @@ bookStore.actions.getAll();
 const book = bookStore.getters.getById(bookId);
 
 reviewStore.actions.getAll();
-const reviews = await bookStore.getters.getReviews(bookId);
+const reviews = bookStore.getters.getReviews();
+console.log(reviews);
 
 // const reviewStore = storeModuleFactory('reviews');
 // const reviewId = Number(route.params.id);

@@ -28,12 +28,7 @@ class BookController extends Controller
         $books = Book::all();
         return BookResource::collection($books);
     }
-
-    public function show(Review $review)
-    {
-        return ReviewResource::collection(Review::all());
-    }
-
+    
     public function destroy(Book $book) {
         $book->delete();
         return response()->json(['message' => 'Book succesfully deleted']);

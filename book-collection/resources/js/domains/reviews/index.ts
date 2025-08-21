@@ -8,10 +8,11 @@ export const baseProjectStore = storeModuleFactory(PROJECT_DOMAIN_NAME);
 export const reviewStore = {
     getters:  {
         ...baseProjectStore.getters,
-        getReviews: async (bookId: number) => {
-            const reviewId = (book_id: number) => computed(() => baseProjectStore.getters.all.value.[book_id])
-            baseProjectStore.getters.all.value.filter((reviewId) => bookId === reviewId);
-        },
+        getReviews: (bookId: number) =>
+            computed(() =>
+                Object.values(baseProjectStore.getters.all.value).filter(
+                    (review: any) => review.book_id === bookId)
+            ),
     },
     setters: baseProjectStore.setters,
     actions: {

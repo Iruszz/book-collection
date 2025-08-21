@@ -1,5 +1,4 @@
 <script setup>
-import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
 import { bookStore } from '..';
 import { reviewStore } from '../../reviews';
@@ -12,19 +11,7 @@ bookStore.actions.getAll();
 const book = bookStore.getters.getById(bookId);
 
 reviewStore.actions.getAll();
-const reviews = bookStore.getters.getReviews();
-console.log(reviews);
-
-// const reviewStore = storeModuleFactory('reviews');
-// const reviewId = Number(route.params.id);
-// reviewStore.actions.getAll();
-// const review = reviewStore.getters.getById(reviewId);
-
-// bookStore.setters.deleteByItem;
-
-// const deleteBook = (id) => {
-//     bookStore.actions.delete(id);
-// }
+const reviews = reviewStore.getters.all;
 
 </script>
 

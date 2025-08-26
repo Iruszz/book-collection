@@ -14,11 +14,9 @@ class ReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        Review::factory()->count(30)->create();
-
         $books = Book::all();
 
-        Review::factory()->count(30)
+        Review::factory()->count(50)
             ->make()
             ->each(function ($review) use ($books) {
                 $review->book_id = $books->random()->id;

@@ -29,8 +29,8 @@ const reviews = reviewStore.getters.getReviews(bookId)
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
         <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-            <img class="w-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
-            <img class="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
+            <img class="w-full dark:hidden" :src="`/assets/book-2-svgrepo-com.svg`" alt="" />
+            <img class="w-full hidden dark:block" :src="`/assets/book-2-svgrepo-com-dark.svg`" alt="" />
             </div>
 
             <div class="mt-6 sm:mt-8 lg:mt-0">
@@ -195,11 +195,16 @@ const reviews = reviewStore.getters.getReviews(bookId)
                         <div class="flex items-center">
                             <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                                 <img
-                                    class="mr-2 w-6 h-6 rounded-full"
-                                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                    class="mr-2 w-6 h-6 rounded-full dark:hidden"
+                                    :src="'/assets/person-crop-circle-fill-svgrepo-com.svg'"
                                     alt="Profile"
                                 />
-                                {{ review.name }}:
+                                <img
+                                    class="mr-2 w-6 h-6 rounded-full hidden dark:block"
+                                    :src="'/assets/person-crop-circle-fill-svgrepo-com-dark.svg'"
+                                    alt="Profile"
+                                />
+                                {{ review.name }}
                             </p>
                         </div>
                         <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
@@ -220,7 +225,14 @@ const reviews = reviewStore.getters.getReviews(bookId)
                             <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
                             </svg>
-                            Reply
+                            Edit
+                        </button>
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                            </svg>
+                            Delete
                         </button>
                     </div>
                 </article>

@@ -1,14 +1,4 @@
 <template>
-    <!-- <nav>
-        <router-link :to="{name: 'books.overview'}">Books Overview</router-link> |
-        <router-link :to="{name: 'books.create'}">Create new Book</router-link> |
-
-        <router-link :to="{name: 'author.overview'}">Author Overview</router-link> |
-        <router-link :to="{name: 'author.create'}">Add new Author</router-link> |
-    </nav> -->
-   
-
-
 <nav class="bg-gray-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">

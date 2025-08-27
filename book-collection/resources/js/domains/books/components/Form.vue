@@ -1,27 +1,3 @@
-<template>
-    <ErrorMessage />
-
-    <form @submit.prevent="handleSubmit">
-        <label>Title:</label>
-        <input v-model="form.title" type="text" required />
-        <FormError name="title" />
-
-        <label>Summary:</label>
-        <textarea v-model="form.summary" required></textarea>
-        <FormError name="summary" />
-
-        <label>Author:</label>
-        <select v-model="form.author_id" required>
-            <option v-for="author in authors" :key="author.id" :value="author.id">
-                {{ author.name }}
-            </option>
-        </select>
-        <FormError name="author.name" />
-
-        <button type="submit">Save</button>
-    </form>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { storeModuleFactory } from '../../../services/store';
@@ -31,14 +7,12 @@ import FormError from '../../../services/components/FormError.vue';
 
 const bookStore = storeModuleFactory('books');
 bookStore.actions.getAll();
-const books = bookStore.getters.all;
 
 const authorStore = storeModuleFactory('authors');
 authorStore.actions.getAll();
 const authors = authorStore.getters.all;
-console.log('authors, ', authors);
 
-const props = defineProps({ book: Object });
+const props = defineProps({ book: Object, title: String, description: String });
 
 const emit = defineEmits(['submit']);
 
@@ -46,3 +20,65 @@ const form = ref({ ...props.book });
 
 const handleSubmit = () => emit('submit', form.value);
 </script>
+
+<template>
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
+        <form @submit.prevent="handleSubmit">
+            <div class="space-y-12">
+                <ErrorMessage />
+                <div class="border-b border-white/10 pb-12">
+                    <h2 class="text-base/7 font-semibold text-white">{{ title }}</h2>
+                    <p class="mt-1 text-sm/6 text-gray-400">{{ description }}</p>
+
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="title" class="block text-sm/6 font-medium text-white">Title</label>
+                            <div class="mt-2">
+                                <input v-model="form.title" id="title" type="text" name="title" autocomplete="given-name" required
+                                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" 
+                            />
+                            </div>
+                        </div>
+                        <FormError name="title" />
+
+                        <div class="col-span-full">
+                                <label for="Summary" class="block text-sm/6 font-medium text-white">Summary</label>
+                            <div class="mt-2">
+                                <textarea v-model="form.summary" id="Summary" name="Summary" rows="3" required
+                                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                                >
+                                </textarea>
+                            </div>
+                                <p class="mt-3 text-sm/6 text-gray-400">Book summary</p>
+                        </div>
+                        <FormError name="summary" />
+
+                        <div class="sm:col-span-3">
+                            <label for="author" class="block text-sm/6 font-medium text-white">Author</label>
+                            <div class="mt-2 grid grid-cols-1">
+                                <select v-model="form.author_id" id="author" name="author" required
+                                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pr-8 pl-3 text-base text-white outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                                >
+                                    <option v-for="author in authors" :key="author.id" :value="author.id">
+                                        {{ author.name }}
+                                    </option>
+                                </select>
+                                <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4">
+                                    <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <FormError name="author.name" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
+                <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</template>

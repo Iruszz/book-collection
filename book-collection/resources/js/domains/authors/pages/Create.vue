@@ -1,10 +1,3 @@
-<template>
-    <div>
-        <h2>Add new Author</h2>
-        <Form :author="author" @submit="handleSubmit" />
-    </div>
-</template>
-
 <script setup>
 import Form from '../components/Form.vue';
 import { createAuthor } from '../store';
@@ -15,6 +8,9 @@ import { authorStore } from '..';
 
 const router = useRouter();
 
+const title = "Create author"
+const description = "Here you can create the author"
+
 const author = ref({
     name: '',
 });
@@ -24,3 +20,9 @@ const handleSubmit = async (item) => {
     router.push({name: 'author.overview'});
 };
 </script>
+
+<template>
+    <div>
+        <Form :author="author" @submit="handleSubmit" :title="title" :description="description" />
+    </div>
+</template>

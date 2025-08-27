@@ -1,10 +1,3 @@
-<template>
-    <div>
-        <h2>Add new Book</h2>
-        <Form :book="book" @submit="handleSubmit" />
-    </div>
-</template>
-
 <script setup>
 import Form from '../components/Form.vue';
 import { storeModuleFactory } from '../../../services/store';
@@ -13,6 +6,9 @@ import { ref } from 'vue';
 import { bookStore } from '..';
 
 const router = useRouter();
+
+const title = "Create book"
+const description = "Here you can create the book"
 
 const book = ref({
     title: '',
@@ -25,3 +21,9 @@ const handleSubmit = async (item) => {
     router.push({name: 'books.overview'});
 };
 </script>
+
+<template>
+    <div>
+        <Form :book="book" @submit="handleSubmit" :title="title" :description="description" />
+    </div>
+</template>

@@ -1,25 +1,22 @@
-<template>
-    <div>
-        <h2>Edit Book</h2>
-        <Form v-if="book" :book="book" @submit="handleSubmit" />
-    </div>
-</template>
-
 <script setup>
 import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
 import { bookStore } from '..';
+import { ref } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 
+const title = "Edit book"
+const description = "Here you can edit the book"
+
 const bookId = Number(route.params.id);
-
 bookStore.actions.getAll();
-
 const book = bookStore.getters.getById(bookId);
-console.log(bookStore);
+
+const authorStore = storeModuleFactory('authors');
+authorStore.actions.getAll();
 
 const handleSubmit = async (data) => {
     await bookStore.actions.update(route.params.id, data);
@@ -27,3 +24,9 @@ const handleSubmit = async (data) => {
 };
 
 </script>
+
+<template>
+    <div>
+        <Form v-if="book" @submit="handleSubmit" :book="book" :title="title" :description="description" />
+    </div>
+</template>

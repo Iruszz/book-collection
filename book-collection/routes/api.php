@@ -22,3 +22,6 @@ Route::put('/authors/{author}', [AuthorController::class, 'update'])->name('auth
 Route::delete('/authors/{author}', [AuthorController::class, 'destroy'])->name('authors.destroy');
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');

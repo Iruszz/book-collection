@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ReviewResource;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Http\Resources\StoreReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -17,50 +18,33 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReviewRequest $request)
     {
-        //
-    }
+        $review = Review::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $reviews = Review::all();
+        return ReviewResource::collection($reviews);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreReviewRequest $request, Review $review)
     {
-        //
+        $review->update($request->validated());
+
+        $reviews = Reviews::all();
+        return ReviewsResource::collection($reviews);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return response()->json(['message' => 'Review succesfully deleted']);
     }
 }

@@ -15,7 +15,7 @@ const authorStore = storeModuleFactory('authors');
 authorStore.actions.getAll();
 const authors = authorStore.getters.all;
 
-const props = defineProps({ review: Object, title: String, description: String });
+const props = defineProps({ review: Object });
 
 const emit = defineEmits(['submit']);
 
@@ -29,7 +29,7 @@ function cancel() {
 </script>
 
 <template>
-<form @submit.prevent="handleSubmit" class="w-full px-125 py-25">
+<form @submit.prevent="handleSubmit">
     <div class="space-y-12">
         <ErrorMessage />
         <div class="border-b border-white/10 pb-12">

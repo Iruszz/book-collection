@@ -1,5 +1,4 @@
 import {storeModuleFactory} from '../../services/store';
-import { computed } from 'vue';
 
 export const PROJECT_DOMAIN_NAME = 'books';
 

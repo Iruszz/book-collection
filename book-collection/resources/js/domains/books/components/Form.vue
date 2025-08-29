@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import { storeModuleFactory } from '../../../services/store';
 import ErrorMessage from '../../../services/components/ErrorMessage.vue';
 import FormError from '../../../services/components/FormError.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 
 const bookStore = storeModuleFactory('books');
 bookStore.actions.getAll();
@@ -19,6 +21,10 @@ const emit = defineEmits(['submit']);
 const form = ref({ ...props.book });
 
 const handleSubmit = () => emit('submit', form.value);
+
+function cancel() {
+  router.push({ name: 'books.overview' })
+}
 </script>
 
 <template>
@@ -75,7 +81,7 @@ const handleSubmit = () => emit('submit', form.value);
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
+                <button type="button" @click="cancel" class="text-sm/6 font-semibold text-white">Cancel</button>
                 <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
             </div>
         </form>

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ReviewResource;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use App\Http\Resources\StoreReviewRequest;
+use App\Http\Requests\StoreReviewRequest;
+
 
 class ReviewController extends Controller
 {
@@ -35,8 +36,8 @@ class ReviewController extends Controller
     {
         $review->update($request->validated());
 
-        $reviews = Reviews::all();
-        return ReviewsResource::collection($reviews);
+        $reviews = Review::all();
+        return ReviewResource::collection($reviews);
     }
 
     /**

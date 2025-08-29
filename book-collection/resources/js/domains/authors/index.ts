@@ -7,7 +7,6 @@ export const baseProjectStore = storeModuleFactory(PROJECT_DOMAIN_NAME);
 export const authorStore = {
     getters:  {
         ...baseProjectStore.getters,
-        
     },
     setters: baseProjectStore.setters,
     actions: {

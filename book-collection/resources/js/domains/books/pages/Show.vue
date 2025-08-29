@@ -1,10 +1,12 @@
 <script setup>
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { bookStore } from '..';
 import { reviewStore } from '../../reviews';
+import Form from '../../reviews/components/FormShowPage.vue';
 
 const route = useRoute();
-// const router = useRouter();
+const router = useRouter();
 
 const bookId = Number(route.params.id);
 bookStore.actions.getAll();
@@ -12,6 +14,17 @@ const book = bookStore.getters.getById(bookId);
 
 reviewStore.actions.getAll();
 const reviews = reviewStore.getters.getReviews(bookId)
+
+const review = ref({
+    book_id: bookId,
+    name: 'harry',
+    review: ''
+});
+
+const handleSubmit = async (item) => {
+    await reviewStore.actions.create(item);
+    router.push({ name: 'books.show' });
+};
 
 const deleteReview = (id) => {
     reviewStore.actions.delete(id);
@@ -174,24 +187,24 @@ const deleteReview = (id) => {
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Reviews ({{ reviews.length }})</h2>
                 </div>
-                <form class="mb-6">
+                <!-- <form @submit.prevent="handleSubmit" class="mb-6">
                     <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                        <label for="comment" class="sr-only">Your comment</label>
-                        <textarea id="comment" rows="6"
-                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                            placeholder="Write a comment..." required></textarea>
+                        <label for="review" class="sr-only">Your review</label>
+                        <textarea id="review" type="text" name="review" autocomplete="given-review" rows="6" placeholder="Write a review..." required
+                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"></textarea>
                     </div>
                     <button type="submit"
                         class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                        Post comment
+                        Post review
                     </button>
-                </form>
+                </form> -->
+                <Form :review="review" @submit="handleSubmit" />
+
 
                 <article
                     v-for="review in reviews"
                     :key="review.id"
-                    class="p-6 text-base bg-white rounded-lg dark:bg-gray-900 mb-4"
-                >
+                    class="p-6 text-base bg-white rounded-lg dark:bg-gray-900 mb-4">
                     <footer class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
                             <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">

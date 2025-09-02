@@ -9,7 +9,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'review'];
+    protected $fillable = ['name', 'review', "book_id"];
 
     public function book() {
         return $this->belongsTo(Book::class);

@@ -1,6 +1,8 @@
 <script setup>
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { bookStore } from '..';
+import Form from '../components/FormDeleteBook.vue';
 
 
 const route = useRoute();
@@ -14,6 +16,8 @@ bookStore.setters.deleteByItem;
 const deleteBook = (id) => {
     bookStore.actions.delete(id);
 }
+
+const open = ref(false);
 
 </script>
 
@@ -41,12 +45,22 @@ const deleteBook = (id) => {
         </div>
         <div class="mt-4 flex justify-between">
             <RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Edit Book</RouterLink>
-            <td><button @click="deleteBook(book.id)">Delete</button></td>
+            <!-- <td><button @click="deleteBook(book.id)">Delete</button></td> -->
+
+            <button @click="open = true">Open Modal</button>
         </div>
       </div>
 
     </div>
   </div>
+
+  <Teleport to="body">
+    <div v-if="open" class="modal">
+      <Form />
+      <button @click="open = false">Close</button>
+    </div>
+  </Teleport>
+
 
 
 

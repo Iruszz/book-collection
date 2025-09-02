@@ -21,7 +21,10 @@ const emit = defineEmits(['submit']);
 
 const form = ref({ ...props.review });
 
-const handleSubmit = () => emit('submit', form.value);
+const handleSubmit = () => {
+    emit('submit', form.value)
+    form.value.review = ""
+};
 
 function cancel() {
   router.push({ name: 'books.show' })

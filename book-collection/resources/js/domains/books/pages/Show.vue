@@ -17,7 +17,7 @@ const reviews = reviewStore.getters.getReviews(bookId)
 
 const review = ref({
     book_id: bookId,
-    name: 'harry',
+    name: 'Harry Potter',
     review: ''
 });
 

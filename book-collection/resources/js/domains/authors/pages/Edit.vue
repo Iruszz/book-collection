@@ -1,5 +1,4 @@
 <script setup>
-import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
 import { authorStore } from '..';

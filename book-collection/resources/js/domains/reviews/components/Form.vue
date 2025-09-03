@@ -1,34 +1,21 @@
 <script setup>
 import { ref } from 'vue';
-import { storeModuleFactory } from '../../../services/store';
 import ErrorMessage from '../../../services/components/ErrorMessage.vue';
 import FormError from '../../../services/components/FormError.vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const bookStore = storeModuleFactory('books');
-bookStore.actions.getAll();
-const books = bookStore.getters.all;
-
-const authorStore = storeModuleFactory('authors');
-authorStore.actions.getAll();
-const authors = authorStore.getters.all;
 
 const props = defineProps({ review: Object, title: String, description: String });
 
-const emit = defineEmits(['submit']);
+const emit = defineEmits(['submit', 'cancel']);
 
 const form = ref({ ...props.review });
 
 const handleSubmit = () => {
     emit('submit', form.value)
-    router.push({ name: 'books.show' })
 };
 
-function cancel() {
-  router.push({ name: 'books.show' })
-}
+const cancel = () => {
+  emit('cancel', form.value);
+};
 </script>
 
 <template>
@@ -50,7 +37,6 @@ function cancel() {
                                 >
                                 </textarea>
                             </div>
-                                <p class="mt-3 text-sm/6 text-gray-400">Book review</p>
                         </div>
                         <FormError name="review" />
                     </div>

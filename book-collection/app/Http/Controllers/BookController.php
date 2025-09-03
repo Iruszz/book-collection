@@ -17,7 +17,7 @@ class BookController extends Controller
         return BookResource::collection(Book::all());
     }
 
-    public function store(StoreReviewRequest $request) {
+    public function store(StoreBookRequest $request) {
         $book = Book::create($request->validated());
 
         $books = Book::all();

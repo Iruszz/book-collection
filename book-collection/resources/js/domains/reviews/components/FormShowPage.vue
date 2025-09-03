@@ -1,19 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { storeModuleFactory } from '../../../services/store';
-import ErrorMessage from '../../../services/components/ErrorMessage.vue';
-import FormError from '../../../services/components/FormError.vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const bookStore = storeModuleFactory('books');
-bookStore.actions.getAll();
-const books = bookStore.getters.all;
-
-const authorStore = storeModuleFactory('authors');
-authorStore.actions.getAll();
-const authors = authorStore.getters.all;
 
 const props = defineProps({ review: Object });
 
@@ -25,39 +11,41 @@ const handleSubmit = () => {
     emit('submit', form.value)
     form.value.review = ""
 };
-
-function cancel() {
-  router.push({ name: 'books.show' })
-}
 </script>
 
 <template>
 <form @submit.prevent="handleSubmit">
-    <div class="space-y-12">
-        <ErrorMessage />
-        <div class="border-b border-white/10 pb-12">
-            <h2 class="text-base/7 font-semibold text-white">{{ title }}</h2>
-            <p class="mt-1 text-sm/6 text-gray-400">{{ description }}</p>
-
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="col-span-full">
-                        <label for="review" class="block text-sm/6 font-medium text-white">Review</label>
-                    <div class="mt-2">
-                        <textarea v-model="form.review" id="review" name="review" rows="3" required
-                        class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                        >
-                        </textarea>
-                    </div>
-                        <p class="mt-3 text-sm/6 text-gray-400">Book review</p>
-                </div>
-                <FormError name="review" />
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" @click="cancel" class="text-sm/6 font-semibold text-white">Cancel</button>
-        <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
-    </div>
+   <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+       <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+           <label for="review" class="sr-only">Your review</label>
+           <textarea v-model="form.review" id="review" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a review..." required ></textarea>
+       </div>
+       <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600 border-gray-200">
+           <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+               Post review
+           </button>
+           <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
+               <button type="button" class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 20">
+                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6"/>
+                    </svg>
+                   <span class="sr-only">Attach file</span>
+               </button>
+               <button type="button" class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                        <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                    </svg>
+                   <span class="sr-only">Set location</span>
+               </button>
+               <button type="button" class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                        <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"/>
+                    </svg>
+                   <span class="sr-only">Upload image</span>
+               </button>
+           </div>
+       </div>
+   </div>
 </form>
+
 </template>

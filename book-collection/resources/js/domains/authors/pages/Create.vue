@@ -1,7 +1,5 @@
 <script setup>
 import Form from '../components/Form.vue';
-import { createAuthor } from '../store';
-import { storeModuleFactory } from '../../../services/store';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { authorStore } from '..';

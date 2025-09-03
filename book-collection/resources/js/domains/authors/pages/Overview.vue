@@ -1,7 +1,5 @@
 <script setup>
-import { storeModuleFactory } from '../../../services/store';
 import { useRoute, useRouter } from 'vue-router';
-import ErrorMessage from '../../../services/components/ErrorMessage.vue';
 import { authorStore } from '..';
 
 const route = useRoute();

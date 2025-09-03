@@ -1,9 +1,6 @@
 <script setup>
-import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { bookStore } from '..';
-import Form from '../components/FormDeleteBook.vue';
-
 
 const route = useRoute();
 const router = useRouter();
@@ -17,8 +14,11 @@ const deleteBook = (id) => {
     bookStore.actions.delete(id);
 }
 
-const open = ref(false);
-
+function myFunction(bookId) {
+  if (confirm("The book is being deleted together with the reviews")) {
+    deleteBook(bookId)
+  } else{}
+}
 </script>
 
 <template>
@@ -45,21 +45,11 @@ const open = ref(false);
         </div>
         <div class="mt-4 flex justify-between">
             <RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Edit Book</RouterLink>
-            <!-- <td><button @click="deleteBook(book.id)">Delete</button></td> -->
-
-            <button @click="open = true">Open Modal</button>
+            <button @click="myFunction(book.id)">Delete</button>
         </div>
       </div>
-
     </div>
   </div>
-
-  <Teleport to="body">
-    <div v-if="open" class="modal">
-      <Form />
-      <button @click="open = false">Close</button>
-    </div>
-  </Teleport>
 
 
 
